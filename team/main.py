@@ -9,11 +9,14 @@ from esc import Esc
 from servo import Servo
 from dev import Controller
 import time
+import pigpio
 
 def main():
     #Erstellung zweier Servos auf Pin 12 und 13
     servoLeft = Servo(12,0,180,90,0,False)
     servoRight = Servo(13, 0, 180, 90, 0, False)
+    
+    
 
     #Erstellung zweier Motoren
     engineLeft = Esc(5)
@@ -26,6 +29,8 @@ def main():
     trimServoLeft = 0
     mode = "norm"
     while True:
+
+        pigpio.pi(45).write(1)
         
         if(ctrl.BTN_A == 1):
             ctrl.rumble()
