@@ -16,7 +16,7 @@ def main():
     servoLeft = Servo(12,0,180,90,0,False)
     servoRight = Servo(13, 0, 180, 90, 0, False)
     
-    #led = pigpio.pi()
+    led = pigpio.pi()
     
 
     #Erstellung zweier Motoren
@@ -31,7 +31,7 @@ def main():
     mode = "norm"
     while True:
         
-        #led.write(45, 1)
+        led.write(45, 1)
         
         if(ctrl.BTN_A == 1):
             ctrl.rumble()
