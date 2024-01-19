@@ -34,7 +34,8 @@ def main():
         
         #led.write(45, 1)
 
-        print(f"a:{ctrl.BTN_A}; b:{ctrl.BTN_B};{ctrl.BTN_X};{ctrl.BTN_Y};")        
+        
+        print(f"a:{ctrl.BTN_A.value()}; b:{ctrl.BTN_B};{ctrl.BTN_X};{ctrl.BTN_Y};")        
         if(ctrl.BTN_A == 1):
             #ctrl.rumble()
             mode = "norm"
