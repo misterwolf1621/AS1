@@ -31,8 +31,8 @@ def main():
     mode = "norm"
 
     for event in ctrl.dev.read_loop(): 
-        if event.type == ecodes.EV_KEY or event.type == ecodes.EV_ABS: 
-            print(event.code)
+        
+            print(event.BTN_A)
     
     '''
     while True:
