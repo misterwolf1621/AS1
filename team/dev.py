@@ -117,10 +117,10 @@ class Controller():
 		self.dev.write(ecodes.EV_FF, effect_id, repeat_count)
 	'''
 
-	def rumble:
+	def rumble(self):
 		pass
 
-		
+
 def controller_test(setup=False):
 	"""Controller-Testfunktion
 	"""
