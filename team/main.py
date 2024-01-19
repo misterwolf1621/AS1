@@ -34,7 +34,7 @@ def main():
         
         #led.write(45, 1)
 
-        print(ctrl.ctrl.ABS_DX)
+        print(ctrl.ABS_DX)
         
         if(ctrl.BTN_A == 1):
             #ctrl.rumble()
