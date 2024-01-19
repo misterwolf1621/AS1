@@ -31,7 +31,10 @@ def main():
     mode = "norm"
 
     for event in ctrl.dev.read_loop(): 
-        
+
+            if(event.code == ctrl.BTN_A):
+                if(event.value == 1):
+                    print("A Pressed")
             print(event.code)
     
     '''
