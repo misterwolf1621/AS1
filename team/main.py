@@ -32,7 +32,7 @@ def main():
 
     for event in ctrl.dev.read_loop(): 
         
-            print(event.BTN_A)
+            print(event)
     
     '''
     while True:
