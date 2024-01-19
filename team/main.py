@@ -30,7 +30,7 @@ def main():
     trimServoLeft = 0
     mode = "norm"
 
-    for event in ctrl.read_loop(): 
+    for event in ctrl.dev.read_loop(): 
         if event.type == ecodes.EV_KEY or event.type == ecodes.EV_ABS: 
             print(event.code)
     
