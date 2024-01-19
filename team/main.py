@@ -32,15 +32,17 @@ def main():
     while True:
         
         #led.write(45, 1)
+
+        print(mode)
         
         if(ctrl.BTN_A == 1):
-            ctrl.rumble()
+            #ctrl.rumble()
             mode = "norm"
         if(ctrl.BTN_X == 1):
-            ctrl.rumble()
+            #ctrl.rumble()
             mode = "l-turn"
         if(ctrl.BTN_B == 1):
-            ctrl.rumble()
+            #ctrl.rumble()
             mode = "r-turn"
         if(ctrl.BTN_Y == 1):
             mode = "rev"
