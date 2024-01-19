@@ -117,7 +117,7 @@ class Controller():
 		self.dev.write(ecodes.EV_FF, effect_id, repeat_count)
 	'''
 
-	def rumble(self):
+	def rumble(self, length_ms:int=1000, delay_ms:int=0, repeat_count:int=1):
 		pass
 
 
