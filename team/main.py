@@ -29,11 +29,12 @@ def main():
     trimServoRight = 0
     trimServoLeft = 0
     mode = "norm"
+    
     while True:
         
         #led.write(45, 1)
 
-        print(mode)
+        print(ctrl.ctrl.ABS_DX)
         
         if(ctrl.BTN_A == 1):
             #ctrl.rumble()
