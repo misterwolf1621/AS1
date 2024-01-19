@@ -97,7 +97,7 @@ class Controller():
 			self.ABS_RTLT = 40	# Kombinierter Linker+Rechter Trigger
 		else:
 			sys.exit('Error: Please select/define your own controller driver.')
-
+	'''
 	def rumble(self, length_ms:int=1000, delay_ms:int=0, repeat_count:int=1):
 		"""Aktivierung der Vibrationsfunktion am Controller.
 		Args:
@@ -115,7 +115,12 @@ class Controller():
 			)
 		effect_id = self.dev.upload_effect(effect)
 		self.dev.write(ecodes.EV_FF, effect_id, repeat_count)
+	'''
 
+	def rumble:
+		pass
+
+		
 def controller_test(setup=False):
 	"""Controller-Testfunktion
 	"""
