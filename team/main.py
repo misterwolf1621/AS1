@@ -29,11 +29,17 @@ def main():
     trimServoRight = 0
     trimServoLeft = 0
     mode = "norm"
+
+    for event in ctrl.read_loop(): 
+        if event.type == ecodes.EV_KEY or event.type == ecodes.EV_ABS: 
+            print(event.code)
     
+    '''
     while True:
         
         #led.write(45, 1)
 
+        ctrl.read_loop()
         
         print(f"a:{ctrl.BTN_A.value()}; b:{ctrl.BTN_B};{ctrl.BTN_X};{ctrl.BTN_Y};")        
         if(ctrl.BTN_A == 1):
@@ -165,6 +171,7 @@ def main():
 
             time.sleep(1)
     #pass
+    '''
 
 if __name__ == "__main__":
     main()
