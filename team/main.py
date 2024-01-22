@@ -39,7 +39,7 @@ def main():
                     print("A Pressed")
                     mode = "norm"
 
-            if(event.code == ctrl.BTN_LT):
+            if(event.code == ctrl.BTN_LB):
                 if(event.value == 1):
                     #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
                     servoLeft.servo_write(90 + trimServoLeft)
@@ -53,7 +53,7 @@ def main():
                     engineLeft.esc_write(propSpeedLeft)
                     engineRight.esc_write(propSpeedRight)
 
-            if(event.code == ctrl.BTN_RT):
+            if(event.code == ctrl.BTN_RB):
                 if(event.value == 1):
                     #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
                     servoLeft.servo_write(90 + trimServoLeft)
@@ -67,7 +67,7 @@ def main():
                     engineLeft.esc_write(propSpeedLeft)
                     engineRight.esc_write(propSpeedRight)
 
-            if(event.code == ctrl.ABS_LB):
+            if(event.code == ctrl.ABS_LT):
                 #Umwandlung LT zu PWM Speed
                 propSpeed = 1500 + 500 * (event.value / 1023)
 
@@ -85,7 +85,7 @@ def main():
 
                 
 
-            if(event.code == ctrl.ABS_RB):
+            if(event.code == ctrl.ABS_RT):
                 #Umwandlung LT zu PWM Speed
                 propSpeed = 1500 - 500 * (event.value / 1023)
 
