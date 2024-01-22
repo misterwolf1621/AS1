@@ -99,16 +99,18 @@ def main():
                 speedLeft = propSpeed + trimSpeedLeft
                 speedRight = propSpeed + trimSpeedRight
 
+                '''
                 if(speedLeft < 1000):
                     speedLeft = 1000
 
                 if(speedRight < 1000):
                     speedRight = 1000
+                '''
 
                 engineLeft.esc_write(speedLeft)
                 engineRight.esc_write(speedRight)
 
-                #print(speedLeft)
+                print(speedLeft)
 
             elif(event.code == ctrl.ABS_DX):
                 trimSpeedLeft = trimSpeedLeft + 5 * event.value
@@ -117,19 +119,27 @@ def main():
             elif(event.code == ctrl.ABS_LSY):
                 
 
+                
+
+                moduledInputLeft = event.value - 32737
+
+                trimServoLeft = trimServoLeft + 2 * (moduledInputLeft/ 32727)
+
+                moduledInputRight = event.value - 32737
+
+                trimServoRight = trimServoRight + 2 * (moduledInputRight/ 32727)
+
+                #max: 65534
+
                 if(trimServoLeft > 180):
                     trimServoLeft = 180
                 elif(trimServoLeft < 0):
                     trimServoLeft = 0
-                
-                trimServoLeft = trimServoLeft + 4 * (event.value/ 32727) -2
 
                 if(trimServoRight > 180):
                     trimServoRight = 180
                 elif(trimServoRight < 0):
                     trimServoRight = 0
-
-                trimServoRight = trimServoLeft + 4 * (event.value/ 32727) -2
 
                 servoLeft.servo_write(trimServoLeft)
                 servoRight.servo_write(trimServoRight)
