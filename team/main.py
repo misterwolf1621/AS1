@@ -123,11 +123,11 @@ def main():
 
                 moduledInputLeft = event.value - 32737
 
-                trimServoLeft = trimServoLeft + 2 * (moduledInputLeft/ 32727)
+                trimServoLeft = trimServoLeft + 5 * (moduledInputLeft/ 33000)
 
                 moduledInputRight = event.value - 32737
 
-                trimServoRight = trimServoRight + 2 * (moduledInputRight/ 32727)
+                trimServoRight = trimServoRight + 5 * (moduledInputRight/ 33000)
 
                 #max: 65534
 
