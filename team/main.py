@@ -122,19 +122,21 @@ def main():
                 elif(trimServoLeft < 0):
                     trimServoLeft = 0
                 
-                trimServoLeft = trimServoLeft + (event.value / 32727) * 180
+                trimServoLeft = trimServoLeft + (event.value / 32727)
 
                 if(trimServoRight > 180):
                     trimServoRight = 180
                 elif(trimServoRight < 0):
                     trimServoRight = 0
 
-                trimServoRight = trimServoRight + (event.value / 32727) * 180
+                trimServoRight = trimServoRight + (event.value / 32727)
 
                 servoLeft.servo_write(trimServoLeft)
                 servoRight.servo_write(trimServoRight)
 
                 print(trimServoLeft)
+                print(event.value)
+
             #print(event.code)
     
     '''
