@@ -35,12 +35,6 @@ def main():
     for event in ctrl.dev.read_loop(): 
             #print(f"{event.code} code")
 
-
-            if(event.code == ctrl.BTN_A):
-                if(event.value == 1):
-                    print("A Pressed")
-                    mode = "norm"
-
             elif(event.code == ctrl.BTN_LB):
                 if(event.value == 1):
                     #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
@@ -74,7 +68,7 @@ def main():
 
             elif(event.code == ctrl.ABS_LT):
                 #Umwandlung LT zu PWM Speed
-                propSpeed = 1500 + 500 * (event.value / 1023)
+                propSpeed = 1500 - 500 * (event.value / 1023)
 
                 speedLeft = propSpeed + trimSpeedLeft
                 speedRight = propSpeed + trimSpeedRight
@@ -94,7 +88,7 @@ def main():
 
             elif(event.code == ctrl.ABS_RT):
                 #Umwandlung LT zu PWM Speed
-                propSpeed = 1500 - 500 * (event.value / 1023)
+                propSpeed = 1500 + 500 * (event.value / 1023)
 
                 speedLeft = propSpeed + trimSpeedLeft
                 speedRight = propSpeed + trimSpeedRight
