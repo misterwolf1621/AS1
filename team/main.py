@@ -27,7 +27,7 @@ def main():
     ctrl = Controller()
 
     trimServoRight = 0
-    trimServoLeft = 0
+    trimServoLeft = 2
     trimSpeedLeft = 0
     trimSpeedRight = 0
     mode = "norm"
