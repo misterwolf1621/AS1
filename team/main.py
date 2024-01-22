@@ -117,7 +117,7 @@ def main():
 
                 if(trimServoRight > 180):
                     trimServoRight = 180
-                else if(trimServoRight < 0):
+                elif(trimServoRight < 0):
                     trimServoRight = 0
 
                 trimServoRight = trimServoRight + (event.value / 32727) * 180
