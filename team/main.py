@@ -35,111 +35,108 @@ def main():
     for event in ctrl.dev.read_loop(): 
             #print(f"{event.code} code")
 
-            elif(event.code == ctrl.BTN_LB):
-                if(event.value == 1):
-                    #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                    servoLeft.servo_write(90 + trimServoLeft)
-                    servoRight.servo_write(90 + trimServoRight)
+        elif(event.code == ctrl.BTN_LB):
+            if(event.value == 1):
+                #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
+                servoLeft.servo_write(90 + trimServoLeft)
+                servoRight.servo_write(90 + trimServoRight)
 
-                    #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
+                #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
-                    propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                    propSpeedRight = 1500 + 320 * (ctrl.ABS_LT / 1023)
+                propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                propSpeedRight = 1500 + 320 * (ctrl.ABS_LT / 1023)
 
-                    engineLeft.esc_write(propSpeedLeft)
-                    engineRight.esc_write(propSpeedRight)
+                engineLeft.esc_write(propSpeedLeft)
+                engineRight.esc_write(propSpeedRight)
 
-            elif(event.code == ctrl.BTN_RB):
-                if(event.value == 1):
-                    #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                    servoLeft.servo_write(90 + trimServoLeft)
-                    servoRight.servo_write(90 + trimServoRight)
+        elif(event.code == ctrl.BTN_RB):
+            if(event.value == 1):
+                #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
+                servoLeft.servo_write(90 + trimServoLeft)
+                servoRight.servo_write(90 + trimServoRight)
 
-                    #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
+                #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
-                    #propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                    #propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
+                #propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                #propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
 
-                    propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 32767)
-                    propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 32767)
+                propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 32767)
+                propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 32767)
 
-                    engineLeft.esc_write(propSpeedLeft)
-                    engineRight.esc_write(propSpeedRight)
+                engineLeft.esc_write(propSpeedLeft)
+                engineRight.esc_write(propSpeedRight)
 
-            elif(event.code == ctrl.ABS_LT):
-                #Umwandlung LT zu PWM Speed
-                propSpeed = 1500 - 500 * (event.value / 1023)
+        elif(event.code == ctrl.ABS_LT):
+            #Umwandlung LT zu PWM Speed
+            propSpeed = 1500 - 500 * (event.value / 1023)
 
-                speedLeft = propSpeed + trimSpeedLeft
-                speedRight = propSpeed + trimSpeedRight
+            speedLeft = propSpeed + trimSpeedLeft
+            speedRight = propSpeed + trimSpeedRight
 
-                if(speedLeft > 2000):
-                    speedLeft = 2000
+            if(speedLeft > 2000):
+                speedLeft = 2000
 
-                if(speedRight > 2000):
-                    speedRight = 2000
+            if(speedRight > 2000):
+                speedRight = 2000
 
-                engineLeft.esc_write(speedLeft)
-                engineRight.esc_write(speedRight)
+            engineLeft.esc_write(speedLeft)
+            engineRight.esc_write(speedRight)
 
-                #print(propSpeed)
-
-                
-
-            elif(event.code == ctrl.ABS_RT):
-                #Umwandlung LT zu PWM Speed
-                propSpeed = 1500 + 500 * (event.value / 1023)
-
-                speedLeft = propSpeed + trimSpeedLeft
-                speedRight = propSpeed + trimSpeedRight
-
-                '''
-                if(speedLeft < 1000):
-                    speedLeft = 1000
-
-                if(speedRight < 1000):
-                    speedRight = 1000
-                '''
-
-                engineLeft.esc_write(speedLeft)
-                engineRight.esc_write(speedRight)
-
-                print(speedLeft)
-
-            elif(event.code == ctrl.ABS_DX):
-                trimSpeedLeft = trimSpeedLeft + 5 * event.value
-                trimSpeedRight = trimSpeedRight - 5 * event.value
-
-            elif(event.code == ctrl.ABS_LSY):
-                
+            #print(propSpeed)
 
                 
 
-                moduledInputLeft = event.value - 32737
+        elif(event.code == ctrl.ABS_RT):
+            #Umwandlung LT zu PWM Speed
+            propSpeed = 1500 + 500 * (event.value / 1023)
 
-                trimServoLeft = trimServoLeft + 5 * (moduledInputLeft/ 33000)
+            speedLeft = propSpeed + trimSpeedLeft
+            speedRight = propSpeed + trimSpeedRight
 
-                moduledInputRight = event.value - 32737
+            '''
+            if(speedLeft < 1000):
+                speedLeft = 1000
 
-                trimServoRight = trimServoRight + 5 * (moduledInputRight/ 33000)
+            if(speedRight < 1000):
+                speedRight = 1000
+            '''
 
-                #max: 65534
+            engineLeft.esc_write(speedLeft)
+            engineRight.esc_write(speedRight)
 
-                if(trimServoLeft > 180):
-                    trimServoLeft = 180
-                elif(trimServoLeft < 0):
-                    trimServoLeft = 0
+            print(speedLeft)
 
-                if(trimServoRight > 180):
-                    trimServoRight = 180
-                elif(trimServoRight < 0):
-                    trimServoRight = 0
+        elif(event.code == ctrl.ABS_DX):
+            trimSpeedLeft = trimSpeedLeft + 5 * event.value
+            trimSpeedRight = trimSpeedRight - 5 * event.value
 
-                servoLeft.servo_write(trimServoLeft)
-                servoRight.servo_write(trimServoRight)
+        elif(event.code == ctrl.ABS_LSY):
 
-                #print(trimServoLeft)
-                print(event.value)
+            moduledInputLeft = event.value - 32737
+
+            trimServoLeft = trimServoLeft + 5 * (moduledInputLeft/ 33000)
+
+            moduledInputRight = event.value - 32737
+
+            trimServoRight = trimServoRight + 5 * (moduledInputRight/ 33000)
+
+            #max: 65534
+
+            if(trimServoLeft > 180):
+                trimServoLeft = 180
+            elif(trimServoLeft < 0):
+                trimServoLeft = 0
+
+            if(trimServoRight > 180):
+                trimServoRight = 180
+            elif(trimServoRight < 0):
+                trimServoRight = 0
+
+            servoLeft.servo_write(trimServoLeft)
+            servoRight.servo_write(trimServoRight)
+
+            #print(trimServoLeft)
+            print(event.value)
 
             #print(event.code)
     
