@@ -104,7 +104,8 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            print(speedLeft + "||" + speedRight)
+            print(speedLeft)
+            print(speedRight)
 
         elif(event.code == ctrl.ABS_DX):
             trimSpeedLeft = trimSpeedLeft + 5 * event.value
