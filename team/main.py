@@ -83,6 +83,8 @@ def main():
                 engineLeft.esc_write(speedLeft)
                 engineRight.esc_write(speedRight)
 
+                print(propSpeed)
+
                 
 
             if(event.code == ctrl.ABS_RT):
