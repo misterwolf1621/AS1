@@ -28,6 +28,8 @@ def main():
 
     trimServoRight = 0
     trimServoLeft = 0
+    trimSpeedLeft = 0
+    trimSpeedRight = 0
     mode = "norm"
 
     for event in ctrl.dev.read_loop(): 
@@ -35,7 +37,94 @@ def main():
             if(event.code == ctrl.BTN_A):
                 if(event.value == 1):
                     print("A Pressed")
-            print(event.code)
+                    mode = "norm"
+
+            if(event.code == ctrl.BTN_LT):
+                if(event.value == 1):
+                    #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
+                    servoLeft.servo_write(90 + trimServoLeft)
+                    servoRight.servo_write(90 + trimServoRight)
+
+                    #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
+
+                    propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                    propSpeedRight = 1500 + 320 * (ctrl.ABS_LT / 1023)
+
+                    engineLeft.esc_write(propSpeedLeft)
+                    engineRight.esc_write(propSpeedRight)
+
+            if(event.code == ctrl.BTN_RT):
+                if(event.value == 1):
+                    #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
+                    servoLeft.servo_write(90 + trimServoLeft)
+                    servoRight.servo_write(90 + trimServoRight)
+
+                    #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
+
+                    propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                    propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
+
+                    engineLeft.esc_write(propSpeedLeft)
+                    engineRight.esc_write(propSpeedRight)
+
+            if(event.code == ctrl.ABS_LT):
+                #Umwandlung LT zu PWM Speed
+                propSpeed = 1500 + 500 * (event.value / 1023)
+
+                speedLeft = propSpeed + trimSpeedLeft
+                speedRight = propSpeed + trimSpeedRight
+
+                if(speedLeft > 2000):
+                    speedLeft = 2000
+
+                if(speedRight > 2000):
+                    speedRight = 2000
+
+                engineLeft.esc_write(speedLeft)
+                engineRight.esc_write(speedRight)
+
+                
+
+            if(event.code == ctrl.ABS_RT):
+                #Umwandlung LT zu PWM Speed
+                propSpeed = 1500 - 500 * (event.value / 1023)
+
+                speedLeft = propSpeed + trimSpeedLeft
+                speedRight = propSpeed + trimSpeedRight
+
+                if(speedLeft < 1000):
+                    speedLeft = 1000
+
+                if(speedRight < 1000):
+                    speedRight = 1000
+
+                engineLeft.esc_write(speedLeft + trimSpeedLeft)
+                engineRight.esc_write(speedRight + trimSpeedRight)
+
+            if(event.code == ctrl.ABS_DX):
+                trimSpeedLeft = event.value + 5 * ABS_DX
+                trimSpeedRight = event.value - 5 * ABS_DY
+
+            if(event.code == ctrl.ABS_LSX):
+                
+
+                if(trimServoLeft > 180):
+                    trimServoLeft = 180
+                else if(trimServoLeft < 0):
+                    trimServoLeft = 0
+                
+                trimServoLeft = trimServoLeft + (event.value / 32727) * 180
+
+                if(trimServoRight > 180):
+                    trimServoRight = 180
+                else if(trimServoRight < 0):
+                    trimServoRight = 0
+
+                trimServoRight = trimServoRight + (event.value / 32727) * 180
+
+                servoLeft.servo_write(trimServoLeft)
+                servoRight.servo_write(trimServoRight)
+            #print(event.code)
     
     '''
     while True:
@@ -59,8 +148,7 @@ def main():
 
 
         if(mode == "norm"):
-            #Umwandlung LT zu PWM Speed
-            propSpeed = 1500 + 500 * (ctrl.ABS_LT / 1023)
+            
 
             #Input Stick Links/Rechts
 
@@ -88,11 +176,7 @@ def main():
 
             #Geschwindigkeit Motoren
 
-            speedLeft = propSpeed / 2 + ((propSpeed / 2) * inputStickX / 32767)
-            speedRight = propSpeed / 2 - ((propSpeed / 2) * inputStickX / 32767)
-
-            engineLeft.esc_write(speedLeft)
-            engineRight.esc_write(speedRight)
+            
 
             # Beide Motoren laufen üblicherweise bei halber eingestellter Leistung über ABS_LT
             # Wenn der Stick bewegt wird, bekommt einer mehr der andere weniger, sodass bei vollausschlag einer bei 100% läuft, der andere gar nicht
@@ -144,33 +228,13 @@ def main():
 
         if(mode == "l-turn"):
 
-            #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-            servoLeft.servo_write(90 + trimServoLeft)
-            servoRight.servo_write(90 + trimServoRight)
-
-            #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
-
-            propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
-            propSpeedRight = 1500 + 320 * (ctrl.ABS_LT / 1023)
-
-            engineLeft.esc_write(propSpeedLeft)
-            engineRight.esc_write(propSpeedRight)
+            
 
             time.sleep(1)
         
         if(mode == "r-turn"):
 
-            #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-            servoLeft.servo_write(90 + trimServoLeft)
-            servoRight.servo_write(90 + trimServoRight)
-
-            #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
-
-            propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
-            propSpeedLeft = 1500 + 320 * (ctrl.ABS_LT / 1023)
-
-            engineLeft.esc_write(propSpeedLeft)
-            engineRight.esc_write(propSpeedRight)
+            
 
             time.sleep(1)
     #pass
