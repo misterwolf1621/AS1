@@ -133,6 +133,8 @@ def main():
 
                 servoLeft.servo_write(trimServoLeft)
                 servoRight.servo_write(trimServoRight)
+
+                print(trimServoLeft)
             #print(event.code)
     
     '''
