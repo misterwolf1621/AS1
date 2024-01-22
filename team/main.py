@@ -33,6 +33,8 @@ def main():
     mode = "norm"
 
     for event in ctrl.dev.read_loop(): 
+            print(f"{event.code} code")
+
 
             if(event.code == ctrl.BTN_A):
                 if(event.value == 1):
@@ -61,8 +63,11 @@ def main():
 
                     #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
-                    propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                    propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
+                    #propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                    #propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
+
+                    propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 32767)
+                    propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 32767)
 
                     engineLeft.esc_write(propSpeedLeft)
                     engineRight.esc_write(propSpeedRight)
