@@ -33,7 +33,7 @@ def main():
     mode = "norm"
 
     for event in ctrl.dev.read_loop(): 
-            print(f"{event.code} code")
+            #print(f"{event.code} code")
 
 
             if(event.code == ctrl.BTN_A):
@@ -107,6 +107,8 @@ def main():
 
                 engineLeft.esc_write(speedLeft + trimSpeedLeft)
                 engineRight.esc_write(speedRight + trimSpeedRight)
+
+                print(speedLeft)
 
             if(event.code == ctrl.ABS_DX):
                 trimSpeedLeft = trimSpeedLeft + 5 * event.value
