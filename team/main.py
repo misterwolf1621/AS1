@@ -67,7 +67,7 @@ def main():
                     engineLeft.esc_write(propSpeedLeft)
                     engineRight.esc_write(propSpeedRight)
 
-            if(event.code == ctrl.ABS_RBLT):
+            if(event.code == ctrl.ABS_RTLT):
                 #Umwandlung LT zu PWM Speed
                 propSpeed = 1500 + 1000 * (event.value / 1023)
 
