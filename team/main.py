@@ -102,8 +102,8 @@ def main():
                 engineRight.esc_write(speedRight + trimSpeedRight)
 
             if(event.code == ctrl.ABS_DX):
-                trimSpeedLeft = event.value + 5 * ABS_DX
-                trimSpeedRight = event.value - 5 * ABS_DY
+                trimSpeedLeft = trimSpeedLeft + 5 * event.value
+                trimSpeedRight = trimSpeedRight - 5 * event.value
 
             if(event.code == ctrl.ABS_LSX):
                 
