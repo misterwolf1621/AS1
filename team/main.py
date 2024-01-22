@@ -82,7 +82,8 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            print(f("{speedLeft}||{speedRight}"))
+            print(speedLeft)
+            print(speedRight)
 
                 
 
