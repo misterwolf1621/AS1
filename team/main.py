@@ -114,7 +114,7 @@ def main():
                 trimSpeedLeft = trimSpeedLeft + 5 * event.value
                 trimSpeedRight = trimSpeedRight - 5 * event.value
 
-            elif(event.code == ctrl.ABS_LSX):
+            elif(event.code == ctrl.ABS_LSY):
                 
 
                 if(trimServoLeft > 180):
