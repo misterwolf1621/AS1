@@ -38,13 +38,13 @@ def main():
         if(event.code == ctrl.BTN_LB):
             if(event.value == 1):
                 #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                servoLeft.servo_write(90 + trimServoLeft)
-                servoRight.servo_write(90 + trimServoRight)
+                servoLeft.servo_write(90)
+                servoRight.servo_write(90)
 
                 #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
                 propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                propSpeedRight = 1500 + 320 * (ctrl.ABS_LT / 1023)
+                propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
 
                 engineLeft.esc_write(propSpeedLeft)
                 engineRight.esc_write(propSpeedRight)
@@ -52,8 +52,8 @@ def main():
         elif(event.code == ctrl.BTN_RB):
             if(event.value == 1):
                 #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                servoLeft.servo_write(90 + trimServoLeft)
-                servoRight.servo_write(90 + trimServoRight)
+                servoLeft.servo_write(90)
+                servoRight.servo_write(90)
 
                 #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
