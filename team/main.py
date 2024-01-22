@@ -67,12 +67,39 @@ def main():
                     engineLeft.esc_write(propSpeedLeft)
                     engineRight.esc_write(propSpeedRight)
 
-            if(event.code == ctrl.ABS_RTLT):
+            if(event.code == ctrl.ABS_LT):
                 #Umwandlung LT zu PWM Speed
-                propSpeed = 1500 + 1000 * (event.value / 1023)
+                propSpeed = 1500 + 500 * (event.value / 1023)
+
+                speedLeft = propSpeed + trimSpeedLeft
+                speedRight = propSpeed + trimSpeedRight
+
+                if(speedLeft > 2000):
+                    speedLeft = 2000
+
+                if(speedRight > 2000):
+                    speedRight = 2000
 
                 engineLeft.esc_write(speedLeft)
                 engineRight.esc_write(speedRight)
+
+                
+
+            if(event.code == ctrl.ABS_RT):
+                #Umwandlung LT zu PWM Speed
+                propSpeed = 1500 - 500 * (event.value / 1023)
+
+                speedLeft = propSpeed + trimSpeedLeft
+                speedRight = propSpeed + trimSpeedRight
+
+                if(speedLeft < 1000):
+                    speedLeft = 1000
+
+                if(speedRight < 1000):
+                    speedRight = 1000
+
+                engineLeft.esc_write(speedLeft + trimSpeedLeft)
+                engineRight.esc_write(speedRight + trimSpeedRight)
 
             if(event.code == ctrl.ABS_DX):
                 trimSpeedLeft = trimSpeedLeft + 5 * event.value
