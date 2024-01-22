@@ -82,7 +82,7 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            #print(propSpeed)
+            print(speedLeft + "||" + speedRight)
 
                 
 
@@ -103,7 +103,7 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            print(speedLeft)
+            print(speedLeft + "||" + speedRight)
 
         elif(event.code == ctrl.ABS_DX):
             trimSpeedLeft = trimSpeedLeft + 5 * event.value
@@ -117,7 +117,7 @@ def main():
 
             moduledInputRight = event.value - 32737
 
-            trimServoRight = trimServoRight + 5 * (moduledInputRight/ 33000)
+            trimServoRight = trimServoRight - 5 * (moduledInputRight/ 33000)
 
             #max: 65534
 
