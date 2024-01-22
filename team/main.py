@@ -73,11 +73,11 @@ def main():
             speedLeft = propSpeed + trimSpeedLeft
             speedRight = propSpeed + trimSpeedRight
 
-            if(speedLeft > 2000):
-                speedLeft = 2000
+            if(speedLeft < 1000):
+                speedLeft = 1000
 
-            if(speedRight > 2000):
-                speedRight = 2000
+            if(speedRight < 1000):
+                speedRight = 1000
 
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
@@ -93,13 +93,12 @@ def main():
             speedLeft = propSpeed + trimSpeedLeft
             speedRight = propSpeed + trimSpeedRight
 
-            '''
-            if(speedLeft < 1000):
-                speedLeft = 1000
+            if(speedLeft > 2000):
+                speedLeft = 2000
 
-            if(speedRight < 1000):
-                speedRight = 1000
-            '''
+            if(speedRight > 2000):
+                speedRight = 2000
+            
 
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
