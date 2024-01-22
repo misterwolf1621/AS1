@@ -91,8 +91,8 @@ class Controller():
 			# Trigger, Werte: 0-1023
 			self.min_value_trigger = 0      # Min Value Trigger
 			self.max_value_trigger = 1023	# Max Value Trigger
-			self.ABS_RT = 5	# Rechter Trigger
-			self.ABS_LT = 2	# Linker Trigger
+			self.ABS_RT = 9	# Rechter Trigger
+			self.ABS_LT = 10	# Linker Trigger
 			# Kombinierte Trigger, Werte: -1023-1023
 			self.ABS_RTLT = 40	# Kombinierter Linker+Rechter Trigger
 		else:
