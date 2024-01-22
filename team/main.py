@@ -105,8 +105,8 @@ def main():
                 if(speedRight < 1000):
                     speedRight = 1000
 
-                engineLeft.esc_write(speedLeft + trimSpeedLeft)
-                engineRight.esc_write(speedRight + trimSpeedRight)
+                engineLeft.esc_write(speedLeft)
+                engineRight.esc_write(speedRight)
 
                 print(speedLeft)
 
