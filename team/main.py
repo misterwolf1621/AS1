@@ -12,6 +12,8 @@ import time
 import pigpio
 
 def main():
+    print("Software up and running")
+    
     #Erstellung zweier Servos auf Pin 12 und 13
     servoLeft = Servo(12,0,180,90,0,False)
     servoRight = Servo(13, 0, 180, 90, 0, False)
@@ -30,48 +32,47 @@ def main():
     trimServoLeft = -2
     trimSpeedLeft = 0
     trimSpeedRight = 0
-    mode = "norm"
+    reset = False
 
     for event in ctrl.dev.read_loop(): 
             #print(f"{event.code} code")
 
         if(event.code == ctrl.BTN_A):
             if(event.value == 1):
-                engineLeft.esc_write(1500)
-                engineRight.esc_write(1500)
-                servoLeft.servo_write(90 + trimServoLeft)
-                servoRight.servo_write(90 - trimServoRight)
+                if(reset == False):
+                    engineLeft.esc_write(1500)
+                    engineRight.esc_write(1500)
+                    servoLeft.servo_write(90 + trimServoLeft)
+                    servoRight.servo_write(90 - trimServoRight)
+                    reset = True
         
         elif(event.code == ctrl.BTN_LB):
             if(event.value == 1):
                 #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                servoLeft.servo_write(90)
-                servoRight.servo_write(90)
+                #servoLeft.servo_write(90)
+                #servoRight.servo_write(90)
 
                 #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
 
-                propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
+                #propSpeedLeft = 1500 - 500 * (ctrl.ABS_LT / 1023)
+                #propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
+                
+                if(reset):
+                    engineLeft.esc_write(1800)
+                    engineRight.esc_write(1400)
 
-                engineLeft.esc_write(propSpeedLeft)
-                engineRight.esc_write(propSpeedRight)
+                
 
         elif(event.code == ctrl.BTN_RB):
             if(event.value == 1):
                 #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
-                servoLeft.servo_write(90)
-                servoRight.servo_write(90)
+                #servoLeft.servo_write(90)
+                #servoRight.servo_write(90)
+                if(reset):
+                    engineLeft.esc_write(1400)
+                    engineRight.esc_write(1800)
 
-                #Schub des positiven Propellers auf 64% begrenzt, da der Vorschub in negative Richtung 64% des Vorschubes in positive Richtung beträgt
-
-                #propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 1023)
-                #propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 1023)
-
-                propSpeedRight = 1500 - 500 * (ctrl.ABS_LT / 32767)
-                propSpeedLeft = 1500 + 500 * (ctrl.ABS_LT / 32767)
-
-                engineLeft.esc_write(propSpeedLeft)
-                engineRight.esc_write(propSpeedRight)
+        #Schub geben
 
         elif(event.code == ctrl.ABS_LT):
             #Umwandlung LT zu PWM Speed
@@ -93,10 +94,10 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            print(speedLeft)
-            print(speedRight)
+            #print(speedLeft)
+            #print(speedRight)
 
-                
+            reset = False
 
         elif(event.code == ctrl.ABS_RT):
             #Umwandlung LT zu PWM Speed
@@ -119,12 +120,16 @@ def main():
             engineLeft.esc_write(speedLeft)
             engineRight.esc_write(speedRight)
 
-            print(speedLeft)
-            print(speedRight)
+            #print(speedLeft)
+            #print(speedRight)
 
+            reset = False
+        #Trimmung:
         elif(event.code == ctrl.ABS_DX):
             trimSpeedLeft = trimSpeedLeft + 5 * event.value
             trimSpeedRight = trimSpeedRight - 5 * event.value
+
+        #UP&Down
 
         elif(event.code == ctrl.ABS_LSY):
 
@@ -152,9 +157,11 @@ def main():
             servoRight.servo_write(trimServoRight)
 
             #print(trimServoLeft)
-            print(event.value)
+            #print(event.value)
 
             #print(event.code)
+
+            reset = False
     
 
 if __name__ == "__main__":
