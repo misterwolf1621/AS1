@@ -60,8 +60,8 @@ def main():
                 #propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
                 
                 if(reset):
-                    engineLeft.esc_write(1400)
-                    engineRight.esc_write(1350)
+                    engineLeft.esc_write(1350)
+                    engineRight.esc_write(1400)
                
                     
             else:
