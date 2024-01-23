@@ -42,8 +42,8 @@ def main():
                 if(reset == False):
                     engineLeft.esc_write(1500)
                     engineRight.esc_write(1500)
-                    servoLeft.servo_write(90 + trimServoLeft)
-                    servoRight.servo_write(90 - trimServoRight)
+                    servoLeft.servo_write(88)
+                    servoRight.servo_write(90)
                     reset = True
         
         elif(event.code == ctrl.BTN_LB):
@@ -78,8 +78,8 @@ def main():
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
-            speedLeft = 1500 - propSpeed + trimSpeedLeft
-            speedRight = 1500 + propSpeed + trimSpeedRight
+            speedLeft = 1500 - propSpeed * trimSpeedLeft
+            speedRight = 1500 + propSpeed * trimSpeedRight
 
             if(speedLeft > 2000):
                 speedLeft = 2000
@@ -103,8 +103,8 @@ def main():
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
-            speedLeft = 1500 + propSpeed + trimSpeedLeft
-            speedRight = 1500 - propSpeed + trimSpeedRight
+            speedLeft = 1500 + propSpeed * trimSpeedLeft
+            speedRight = 1500 - propSpeed * trimSpeedRight
 
             if(speedLeft > 2000):
                 speedLeft = 2000
@@ -126,8 +126,8 @@ def main():
             reset = False
         #Trimmung:
         elif(event.code == ctrl.ABS_DX):
-            trimSpeedLeft = trimSpeedLeft + 5 * event.value
-            trimSpeedRight = trimSpeedRight - 5 * event.value
+            trimSpeedLeft = trimSpeedLeft + 0.1 * event.value
+            trimSpeedRight = trimSpeedLeft - 0.1 * event.value
 
         #UP&Down
 
