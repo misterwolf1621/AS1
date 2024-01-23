@@ -62,10 +62,11 @@ def main():
                 if(reset):
                     engineLeft.esc_write(1600)
                     engineRight.esc_write(1400)
-                else:
-                    engineLeft.esc_write(1500)
-                    engineRight.esc_write(1500)
-
+               
+                    
+            else:
+                engineLeft.esc_write(1500)
+                engineRight.esc_write(1500)
                 
 
         elif(event.code == ctrl.BTN_RB):
@@ -76,9 +77,9 @@ def main():
                 if(reset):
                     engineLeft.esc_write(1400)
                     engineRight.esc_write(1600)
-                else:
-                    engineLeft.esc_write(1500)
-                    engineRight.esc_write(1500)
+            else:
+                engineLeft.esc_write(1500)
+                engineRight.esc_write(1500)
         #Schub geben
 
         elif(event.code == ctrl.ABS_LT):
