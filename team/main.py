@@ -58,8 +58,11 @@ def main():
                 #propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
                 
                 if(reset):
-                    engineLeft.esc_write(1800)
+                    engineLeft.esc_write(1600)
                     engineRight.esc_write(1400)
+                else:
+                    engineLeft.esc_write(1500)
+                    engineRight.esc_write(1500)
 
                 
 
@@ -70,8 +73,10 @@ def main():
                 #servoRight.servo_write(90)
                 if(reset):
                     engineLeft.esc_write(1400)
-                    engineRight.esc_write(1800)
-
+                    engineRight.esc_write(1600)
+                else:
+                    engineLeft.esc_write(1500)
+                    engineRight.esc_write(1500)
         #Schub geben
 
         elif(event.code == ctrl.ABS_LT):
