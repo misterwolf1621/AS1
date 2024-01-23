@@ -44,6 +44,8 @@ def main():
                     engineRight.esc_write(1500)
                     servoLeft.servo_write(88)
                     servoRight.servo_write(90)
+                    trimServoLeft = 88
+                    trimServoRight = 90
                     reset = True
         
         elif(event.code == ctrl.BTN_LB):
