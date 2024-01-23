@@ -61,7 +61,7 @@ def main():
                 
                 if(reset):
                     engineLeft.esc_write(1600)
-                    engineRight.esc_write(1400)
+                    engineRight.esc_write(1600)
                
                     
             else:
@@ -75,7 +75,7 @@ def main():
                 #servoLeft.servo_write(90)
                 #servoRight.servo_write(90)
                 if(reset):
-                    engineLeft.esc_write(1400)
+                    engineLeft.esc_write(1600)
                     engineRight.esc_write(1600)
             else:
                 engineLeft.esc_write(1500)
