@@ -35,7 +35,14 @@ def main():
     for event in ctrl.dev.read_loop(): 
             #print(f"{event.code} code")
 
-        if(event.code == ctrl.BTN_LB):
+        if(event.code == ctrl.BTN_A):
+            if(event.value == 1):
+                engineLeft.esc_write(1500)
+                engineRight.esc_write(1500)
+                servoLeft.servo_write(90 + trimServoLeft)
+                servoRight.servo_write(90 - trimServoRight)
+        
+        elif(event.code == ctrl.BTN_LB):
             if(event.value == 1):
                 #verwendung von reverse Thrust, wegen Drehbarkeit um maximal 180°
                 servoLeft.servo_write(90)
