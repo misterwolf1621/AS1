@@ -60,8 +60,9 @@ def main():
                 #propSpeedRight = 1500 + 500 * (ctrl.ABS_LT / 1023)
                 
                 if(reset):
-                    engineLeft.esc_write(1250)
-                    engineRight.esc_write(1400)
+                    engineLeft.esc_write(1300)
+                    engineRight.esc_write(1260)
+                    #Abweichung 20%
                
                     
             else:
@@ -75,8 +76,9 @@ def main():
                 #servoLeft.servo_write(90)
                 #servoRight.servo_write(90)
                 if(reset):
-                    engineLeft.esc_write(1750)
-                    engineRight.esc_write(1600)
+                    engineLeft.esc_write(1740)
+                    engineRight.esc_write(1700)
+                    #Abweichung 20%
             else:
                 engineLeft.esc_write(1500)
                 engineRight.esc_write(1500)
