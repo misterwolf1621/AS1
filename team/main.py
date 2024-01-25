@@ -137,7 +137,7 @@ def main():
         #Trimmung:
         elif(event.code == ctrl.ABS_DX):
             trimSpeedLeft = trimSpeedLeft + 0.1 * event.value
-            trimSpeedRight = trimSpeedLeft - 0.1 * event.value
+            trimSpeedRight = trimSpeedLeft + 0.1 * event.value
 
         #UP&Down
 
