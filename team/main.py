@@ -32,8 +32,8 @@ def main():
 
     trimServoRight = 0
     trimServoLeft = -2
-    trimSpeedLeft = 0.1
-    trimSpeedRight = -0.1
+    trimSpeedLeft = -0.1
+    trimSpeedRight = 0.1
     reset = False
 
     for event in ctrl.dev.read_loop(): 
