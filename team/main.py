@@ -90,8 +90,8 @@ def main():
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
-            speedLeft = 1500 - propSpeed * (1 + trimSpeedLeft)
-            speedRight = 1500 + propSpeed * (1 + trimSpeedRight) + 5
+            speedLeft = 1500 - propSpeed * (1 + trimSpeedLeft) - 5
+            speedRight = 1500 + propSpeed * (1 + trimSpeedRight)
 
             if(speedLeft > 2000):
                 speedLeft = 2000
@@ -115,8 +115,8 @@ def main():
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
-            speedLeft = 1500 + propSpeed * (1 + trimSpeedLeft) + 10
-            speedRight = 1500 - propSpeed * (1 + trimSpeedRight)
+            speedLeft = 1500 + propSpeed * (1 + trimSpeedLeft)
+            speedRight = 1500 - propSpeed * (1 + trimSpeedRight) -5
 
             if(speedLeft > 2000):
                 speedLeft = 2000
