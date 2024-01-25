@@ -90,9 +90,12 @@ def main():
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
-            speedLeft = 1500 - propSpeed * (1 + trimSpeedLeft)
-            speedRight = 1500 + propSpeed * (1 + trimSpeedRight) + 5
-
+            if(propSpeed > 50):
+                speedLeft = 1500 - propSpeed * (1 + trimSpeedLeft)
+                speedRight = 1500 + propSpeed * (1 + trimSpeedRight) + 5
+            else:
+                speedLeft = 1500
+                speedRight = 1500
             if(speedLeft > 2000):
                 speedLeft = 2000
             elif(speedLeft < 1000):
@@ -114,9 +117,13 @@ def main():
         elif(event.code == ctrl.ABS_LT):
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
+            if(propSpeed > 50):
+                speedLeft = 1500 + propSpeed * (1 + trimSpeedRight) 
+                speedRight = 1500 - propSpeed * (1 + trimSpeedLeft) - 5
 
-            speedLeft = 1500 + propSpeed * (1 + trimSpeedRight) 
-            speedRight = 1500 - propSpeed * (1 + trimSpeedLeft) - 5
+            else:
+                speedLeft = 1500
+                speedRight = 1500
 
             if(speedLeft > 2000):
                 speedLeft = 2000
