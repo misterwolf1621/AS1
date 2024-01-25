@@ -84,7 +84,7 @@ def main():
                 engineRight.esc_write(1500)
         #Schub geben
 
-        elif(event.code == ctrl.ABS_LT):
+        elif(event.code == ctrl.ABS_RT):
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
@@ -109,7 +109,7 @@ def main():
 
             reset = False
 
-        elif(event.code == ctrl.ABS_RT):
+        elif(event.code == ctrl.ABS_LT):
             #Umwandlung LT zu PWM Speed
             propSpeed = 500 * (event.value / 1023)
 
