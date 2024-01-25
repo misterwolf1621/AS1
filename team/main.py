@@ -22,8 +22,9 @@ def main():
     
 
     #Erstellung zweier Motoren
-    engineRight = Esc(6)
     engineLeft = Esc(5)
+    engineRight = Esc(6)
+    
     
 
     #Erstellung X-Box Controller
